@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <EventCard v-for="event in events" :key = "event.id" :event="event" />
+    <div class = "events">
+      <h1>Events For Good</h1>
+      <EventCard v-for="event in events" :key = "event.id" :event="event" />
+    </div>
   </div>
 </template>
 
@@ -54,3 +57,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.events{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</style>
