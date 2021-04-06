@@ -4,7 +4,7 @@
     <router-link :to="{name: 'EventCreate' }" exact-path>Create</router-link> |
     <router-link :to="{name: 'About' }" exact-path>About</router-link>
   </div>
-  <router-view />
+  <router-view :key="$route.fullPath" />
 </template>
 
 <style>
