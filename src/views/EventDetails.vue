@@ -1,31 +1,60 @@
 <template>
     <div v-if="event">
-        <h1>{{ event.title }}</h1>
-        <p>  {{ event.time }} on {{ event.date.slice(0,10) }} @ {{ event.location }}</p>
-        <h4>Category: {{event.category}}</h4>
-        <h5>Organized by {{event.organizer.user ? event.organizer.user.name : event.organizer.name  ? event.organizer.name : event.organizer }}</h5>
-        <p>  {{ event.description }}  </p>
-    </div>
+        <div class="event-header">
+        <span class="eyebrow">@{{ event.time }} on {{ event.date || date }}</span>
+        <h1 class="title">{{ event.title }}</h1>
+        <h5>Organized by {{ event.organizer ? event.organizer.name? event.organizer.name : event.organizer : '' }}</h5>
+        <h5>Category: {{ event.category }}</h5>
+        </div>
+
+        <h2>Location</h2>
+
+        <address>{{ event.location }}</address>
+
+        <h2>Event details</h2>
+        <p>{{ event.description }}</p>
+
+        <h2>
+        Attendees
+        <span class="badge -fill-gradient">{{ event.attendees ? event.attendees.length : 0 }}</span>
+        </h2>
+        <ul class="list-group">
+        <li v-for="(attendee, index) in event.attendees" :key="index" class="list-item">
+            <b>{{ attendee.name }}</b>
+        </li>
+        </ul>
+  </div>
 </template>
 
 <script>
-import EventService from '@/services/EventService.js';
+import {mapState} from 'vuex';
+
 export default {
     props: ['id'],
-    data(){
-        return {
-            event: null
-        }
-    },
     created(){
-        EventService.getEvent(this.id)
-            .then((response) => {
-            this.event = response.data;
-        })
-        .catch(error => {
-            alert(`oh no server request failed! Check the console for details!`)
-            console.log('error getting events: ', error)
-        })
-    }
+        this.$store.dispatch('fetchSingleEvent', this.id)
+    },
+    computed:  mapState (['event'])
 }
 </script>
+
+<style scoped>
+.location {
+  margin-bottom: 0;
+}
+.location > .icon {
+  margin-left: 10px;
+}
+.event-header > .title {
+  margin: 0;
+}
+.list-group {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.list-group > .list-item {
+  padding: 1em 0;
+  border-bottom: solid 1px #e5e5e5;
+}
+</style>

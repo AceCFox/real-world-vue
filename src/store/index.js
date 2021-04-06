@@ -6,7 +6,8 @@ export default createStore({
     user: {id: 'abc123', name: 'Adam Jahr' },
     categories: ['sustainability', 'nature', 'animal welfare', 'housing', 'education', 'food', 'community'],
     events: [],
-    maxPage: null
+    maxPage: null,
+    event: {}
   },
   mutations: {
     ADD_EVENT(state,event){
@@ -17,6 +18,9 @@ export default createStore({
     },
     SET_MAX_PAGE(state, count){
       state.maxPage = Math.ceil(count/3)
+    },
+    SET_EVENT(state, event) {
+      state.event = event
     }
   },
   actions: {
@@ -36,11 +40,31 @@ export default createStore({
         alert(`oh no server request failed! Check the console for details!`)
         console.log('error getting events: ', error)
       })
+    },
+    fetchSingleEvent({ commit, getters }, id) {
+        const event = getters.getEventById(id)
+        if (event) {
+          commit ('SET_EVENT', event)
+        } else {
+          EventService.getEvent( id )
+          .then((response) => {
+              commit('SET_EVENT', response.data );
+          })
+          .catch(error => {
+              alert(`oh no server request failed! Check the console for details!`)
+              console.log('error getting events: ', error)
+          })
+        }
     } 
   },
-  getters: {
-    catLength: state => {
-      return state.categories.length
+  getters: { 
+    getEventById: state => id => {
+      for (let item of state.events){
+        if (item.id == id) {
+          return item
+        }
+      }
+      return undefined
     }
-  },
+  }
 });
