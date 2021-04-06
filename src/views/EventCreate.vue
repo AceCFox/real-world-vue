@@ -68,8 +68,16 @@
           }
         },
         createEvent(){
-            console.log ('creating event: ', this.event);
-            this.$store.dispatch('createEvent', this.event)
+            this.$store.dispatch('createEvent', this.event) .then(() => {
+                this.$router.push({
+                    name: 'EventDetails',
+                    params: { id: this.event.id}
+                })
+                this.event = this.createFreshEvent()
+            }).catch((err) => {
+                alert('oops bad server request, check the console')
+                console.log('error encountered in event post:', err)
+            })
         }
       }
     }

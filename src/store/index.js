@@ -14,9 +14,9 @@ export default createStore({
   },
   actions: {
     createEvent({ commit }, event) {
-      EventService.postEvent(event)
-      commit ('ADD_EVENT', event)
-      console.log('in createEvent action')
+      return EventService.postEvent(event) .then(() => {
+        commit ('ADD_EVENT', event)
+      })
     } 
   },
   getters: {

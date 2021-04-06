@@ -58,6 +58,20 @@
       "date": "2021-04-06T05:00:00.000Z",
       "time": "1:00",
       "attendees": []
+    },
+    {
+      "id": 5194313,
+      "category": "community",
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam Jahr"
+      },
+      "title": "Skating",
+      "description": "Roller skating for all ages",
+      "location": "GFS",
+      "date": "2021-04-11T05:00:00.000Z",
+      "time": "11:00",
+      "attendees": []
     }
   ]
 }
