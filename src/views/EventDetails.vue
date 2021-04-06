@@ -3,7 +3,7 @@
         <h1>{{ event.title }}</h1>
         <p>  {{ event.time }} on {{ event.date.slice(0,10) }} @ {{ event.location }}</p>
         <h4>Category: {{event.category}}</h4>
-        <h5>Organized by {{ event.organizer.name  ? event.organizer.name : event.organizer }}</h5>
+        <h5>Organized by {{event.organizer.user ? event.organizer.user.name : event.organizer.name  ? event.organizer.name : event.organizer }}</h5>
         <p>  {{ event.description }}  </p>
     </div>
 </template>

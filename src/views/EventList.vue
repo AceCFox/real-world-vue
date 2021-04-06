@@ -10,28 +10,24 @@
 <script>
 // @ is an alias to /src
 import EventCard from "@/components/EventCard.vue";
-import EventService from "@/services/EventService.js";
+import { mapState } from 'vuex';
 
 export default {
   name: "EventList",
   components: {
     EventCard
   },
-  data(){
-    return{
-      events: null
-    }
-  },
   created(){
-    EventService.getEvents()
-    .then((response) => {
-      this.events = response.data;
-      })
-    .catch(error => {
-      alert(`oh no server request failed! Check the console for details!`)
-      console.log('error getting events: ', error)
+    this.$store.dispatch('fetchEvents', {
+      perPage: 3,
+      page: this.page
     })
-  }
+  },
+  computed: {
+    page(){
+      return parseInt(this.$route.query.page) || 1
+    }, 
+    ...mapState(['events'])}
 };
 </script>
 
