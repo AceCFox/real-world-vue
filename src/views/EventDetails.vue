@@ -23,6 +23,7 @@
             <b>{{ attendee.name }}</b>
         </li>
         </ul>
+        <button class="delete-btn" v-on:click="clickedDelete">Delete Event</button>
   </div>
 </template>
 
@@ -37,7 +38,12 @@ export default {
     computed:  mapState ({
         event: state => state.event.event
     }),
-    methods: mapActions('event', ['fetchSingleEvent'])
+    methods: {
+        clickedDelete(){
+            alert('you did it bb you clicked delete!')
+        },
+       ...mapActions('event', ['fetchSingleEvent']) 
+    }
 }
 </script>
 
@@ -59,5 +65,23 @@ export default {
 .list-group > .list-item {
   padding: 1em 0;
   border-bottom: solid 1px #e5e5e5;
+}
+.delete-btn{
+    margin-top: 15px;
+    margin-bottom: 50px;
+    border-radius: 5px;
+    border-style: none;
+    padding: 5px 10px;
+    font-family: sans-serif;
+    background: linear-gradient(to right, #8d144d, #cf8f6a);
+    color: rgb(255, 251, 251);
+    cursor:pointer;
+    font-size: 120%;
+}
+.delete-btn:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.delete-btn:active{
+  transform: translateY(4px)
 }
 </style>
