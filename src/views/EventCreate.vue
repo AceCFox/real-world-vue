@@ -68,7 +68,7 @@
           }
         },
         createEvent(){
-            this.$store.dispatch('createEvent', this.event) .then(() => {
+            this.$store.dispatch('event/createEvent', this.event) .then(() => {
                 this.$router.push({
                     name: 'EventDetails',
                     params: { id: this.event.id}

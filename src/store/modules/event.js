@@ -1,5 +1,6 @@
 import EventService from '@/services/EventService.js';
 
+export const namespaced = true;
 
 export const state = {
     events: [],
@@ -23,9 +24,10 @@ export const  mutations = {
   }
 
 export const actions =  {
-    createEvent({ commit }, event) {
+    createEvent({ dispatch, rootState }, event) {
+      console.log('User creating event is ' + rootState.user.user.name)
       return EventService.postEvent(event) .then(() => {
-        commit ('ADD_EVENT', event) 
+        dispatch('fetchEvents(3,1)')
       })
     },
     fetchEvents({commit}, { perPage, page }) {
