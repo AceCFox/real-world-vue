@@ -24,6 +24,22 @@ export const  mutations = {
   }
 
 export const actions =  {
+    deleteEvent({ dispatch,}, id ){
+        return EventService.deleteEvent(id).then(() =>{
+            const notification = {
+                type: 'success',
+                message: 'Event sucessfully deleted!'
+            }
+            dispatch('notification/add', notification, {root : true} )
+        }).catch(error => {
+            const notification = {
+                type: 'error',
+                message: 'Problem while deleting event: ' + error.message
+            }
+            dispatch('notification/add', notification, {root : true} )
+            throw error;
+          })
+    },
     createEvent({ dispatch, rootState }, event) {
       console.log('User creating event is ' + rootState.user.user.name)
       return EventService.postEvent(event) .then(() => {

@@ -1,4 +1,5 @@
 <template>
+    <ConfirmDelete v-if="deleteModalOpen" @closeModal = "clickedDelete" :id="event.id"/>
     <div v-if="event">
         <div class="event-header">
         <span class="eyebrow">@{{ event.time }} on {{ event.date || date }}</span>
@@ -28,19 +29,28 @@
 </template>
 
 <script>
+// @ is an alias to /src
+import ConfirmDelete from "@/components/ConfirmDelete.vue";
 import {mapState, mapActions} from 'vuex';
 
 export default {
+    name: "EventDetails",
+    components: {
+        ConfirmDelete
+    },
     props: ['id'],
+    data(){
+        return{deleteModalOpen: false};
+    },
     created(){
         this.fetchSingleEvent(this.id)
     },
-    computed:  mapState ({
-        event: state => state.event.event
-    }),
+    computed:  {
+        ...mapState ({event: state => state.event.event})
+    },
     methods: {
         clickedDelete(){
-            alert('you did it bb you clicked delete!')
+            this.deleteModalOpen = !this.deleteModalOpen
         },
        ...mapActions('event', ['fetchSingleEvent']) 
     }
