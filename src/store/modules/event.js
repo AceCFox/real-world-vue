@@ -30,7 +30,7 @@ export const actions =  {
         dispatch('fetchEvents(3,1)')
       })
     },
-    fetchEvents({commit}, { perPage, page }) {
+    fetchEvents({commit, dispatch}, { perPage, page }) {
       EventService.getEvents(perPage, page)
       .then((response) => {
         const count = response.headers['x-total-count'];
@@ -38,11 +38,14 @@ export const actions =  {
         commit ('SET_EVENTS', response.data);
         })
       .catch(error => {
-        alert(`oh no server request failed! Check the console for details!`)
-        console.log('error getting events: ', error)
+        const notification = {
+            type: 'error',
+            message: 'Problem while fetching events: ' + error.message
+        }
+        dispatch('notification/add', notification, {root : true} )
       })
     },
-    fetchSingleEvent({ commit, getters }, id) {
+    fetchSingleEvent({ commit, getters, dispatch }, id) {
         const event = getters.getEventById(id)
         if (event) {
           commit ('SET_EVENT', event)
@@ -52,8 +55,11 @@ export const actions =  {
               commit('SET_EVENT', response.data );
           })
           .catch(error => {
-              alert(`oh no server request failed! Check the console for details!`)
-              console.log('error getting events: ', error)
+            const notification = {
+                type: 'error',
+                message: 'Problem while fetching event: ' + error.message
+            }
+            dispatch('notification/add', notification, {root : true} )
           })
         }
     } 
