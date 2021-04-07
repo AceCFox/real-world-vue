@@ -75,7 +75,6 @@
                 })
                 this.event = this.createFreshEvent()
             }).catch((err) => {
-                alert('oops bad server request, check the console')
                 console.log('error encountered in event post:', err)
             })
         }

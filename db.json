@@ -273,6 +273,34 @@
       "date": "2021-04-25T05:00:00.000Z",
       "time": "18:00",
       "attendees": []
+    },
+    {
+      "id": 3740595,
+      "category": "community",
+      "organizer": {
+        "id": "abc123",
+        "name": "Ace"
+      },
+      "title": "Test event",
+      "description": "Test description",
+      "location": "test location",
+      "date": "2021-04-24T05:00:00.000Z",
+      "time": "14:00",
+      "attendees": []
+    },
+    {
+      "id": 6328333,
+      "category": "education",
+      "organizer": {
+        "id": "abc123",
+        "name": "Ace"
+      },
+      "title": "Learn stuff",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
     }
   ]
 }

@@ -27,7 +27,19 @@ export const actions =  {
     createEvent({ dispatch, rootState }, event) {
       console.log('User creating event is ' + rootState.user.user.name)
       return EventService.postEvent(event) .then(() => {
-        dispatch('fetchEvents(3,1)')
+        dispatch(`fetchEvents(4, ${this.maxPage})`)
+        const notification = {
+            type: 'success',
+            message: 'Event sucessfully created!'
+        }
+        dispatch('notification/add', notification, {root : true} )
+      }).catch(error => {
+        const notification = {
+            type: 'error',
+            message: 'Problem while creating new event: ' + error.message
+        }
+        dispatch('notification/add', notification, {root : true} )
+        throw error;
       })
     },
     fetchEvents({commit, dispatch}, { perPage, page }) {
