@@ -20,12 +20,14 @@ export default {
   props: {
     type: String,
     id: Number,
+    category: String
   },
   methods:{
       closeModal(){
           this.$emit('closeModal')
       },
       yesDelete(){
+        if(this.type==='event'){
            this.$store.dispatch('event/deleteEvent', this.id) .then(() => {
                 this.$emit('closeModal')
                 this.$router.push({
@@ -34,6 +36,21 @@ export default {
             }).catch((err) => {
                 console.log('error encountered in event delete:', err)
             })
+          } else if(this.type ==='category'){
+            this.$store.dispatch('categories/remove', this.category)
+            this.$emit('closeModal')
+            this.$router.push({
+                name: 'AddCatgories'
+            })
+          } else {
+            const notification = {
+                type: 'error',
+                message: 'Oops, unable to delete, check the console'
+            }
+            this.$tore.dispatch('notification/add', notification)
+            console.log('type not determineable by ConfirmDelet.yesDelete()')
+            this.$emit('closeModal')
+          }
       }
   }
 };

@@ -5,6 +5,7 @@
           <select v-model="event.category">
             <option v-for="cat in categories.categories" :key="cat">{{ cat }}</option>
           </select>
+          <h4 class = "button" @click="editCategories">Add or Remove a Category</h4>
           <h3>Name & describe your event</h3>
             <BaseInput
                 label="Title"
@@ -81,6 +82,11 @@
             }).catch((err) => {
                 console.log('error encountered in event post:', err)
             })
+        },
+        editCategories(){
+            this.$router.push({
+                    name: 'AddCategories'
+                })
         }
       }
     }
@@ -90,4 +96,19 @@
     .field{
         margin-bottom: 24px;
     }
+    .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+  padding: 0 40px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
 </style>

@@ -3,6 +3,7 @@ import EventList from "../views/EventList.vue";
 import About from "../views/About.vue";
 import EventDetails from "../views/EventDetails.vue";
 import EventCreate from '../views/EventCreate.vue';
+import AddCategories from '../views/AddCategories.vue';
 
 const routes = [
   {
@@ -26,6 +27,12 @@ const routes = [
     name: "EventCreate",
     store: true,
     component: EventCreate, 
+  },
+  {
+    path: '/categories/',
+    name: "AddCategories",
+    store: true,
+    component: AddCategories, 
   },
 ];
 
