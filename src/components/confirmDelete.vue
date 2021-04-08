@@ -40,7 +40,7 @@ export default {
             this.$store.dispatch('categories/remove', this.category)
             this.$emit('closeModal')
             this.$router.push({
-                name: 'AddCatgories'
+                name: 'AddCategories'
             })
           } else {
             const notification = {

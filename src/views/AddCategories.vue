@@ -1,4 +1,10 @@
 <template>
+    <ConfirmDelete 
+        v-if="deleteModalOpen" 
+        @closeModal = "toggleModal"  
+        type = 'category'
+        :category = "catToDelete"
+        />
     <h3>Add A Category</h3>
     <BaseInput
         label="New Category"
@@ -17,14 +23,19 @@
 
 <script>
 import BaseInput from '../components/BaseInput.vue'
+import ConfirmDelete from "@/components/ConfirmDelete.vue";
+
 export default {
     name: "AddCategories",
     components: {
-        BaseInput
+        BaseInput,
+        ConfirmDelete,
       },
     data(){
         return {
-            newCategory: ''
+            newCategory: '',
+            deleteModalOpen: false,
+            catToDelete: ''
         }
     },
     methods:{
@@ -35,9 +46,14 @@ export default {
         },
         clickedAdd(){
             this.$store.dispatch('categories/add', this.newCategory)
+            this.newCategory = ''
         },
         onX(category){
-            this.$store.dispatch('categories/remove', category)
+            this.catToDelete = category;
+            this.toggleModal()
+        },
+        toggleModal(){
+            this.deleteModalOpen = !this.deleteModalOpen
         }
     },
     computed:{
