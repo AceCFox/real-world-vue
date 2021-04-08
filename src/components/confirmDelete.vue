@@ -88,6 +88,7 @@ h2{
 }
 
 .button-container{
+    display: flex;
     justify-content: space-between;
 }
 </style>
