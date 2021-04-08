@@ -6,19 +6,21 @@
             <option v-for="cat in categories.categories" :key="cat">{{ cat }}</option>
           </select>
           <h3>Name & describe your event</h3>
-          <div class="field">
-            <label>Title</label>
-            <input v-model="event.title" type="text" placeholder="Add an event title"/>
-          </div>
-          <div class="field">
-            <label>Description</label>
-            <input v-model="event.description" type="text" placeholder="Add a description"/>
-          </div>
-          <h3>Where is your event?</h3>
-          <div class="field">
-            <label>Location</label>
-            <input v-model="event.location" type="text" placeholder="Add a location"/>
-          </div>
+            <BaseInput
+                label="Title"
+                v-model="event.title"
+                type="text"
+                />
+            
+            <BaseInput
+                v-model="event.description"
+                label="Description"
+                type="text" />
+            <h3>Where is your event?</h3>
+            <BaseInput
+                v-model="event.address"
+                label="Address"
+                type="text" />
           <h3>When is your event?</h3>
           <div class="field">
             <label>Date</label>
@@ -36,9 +38,11 @@
 
  <script>
     import Datepicker from 'vue3-datepicker'
+    import BaseInput from "@/components/BaseInput.vue";
     export default {
       components: {
-        Datepicker
+        Datepicker,
+        BaseInput
       },
       data() {
         const times = []

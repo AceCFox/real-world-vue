@@ -3,7 +3,7 @@
         <div class = "modal-mask" >
             <div class = "modal-container">
                 <div class = "modal-header">
-                    <h3>Are you sure you want to delete this event?</h3>
+                    <h3>Are you sure you want to delete this {{type}}?</h3>
                 </div>
                 <div class = "button-container">
                     <button @click="yesDelete">Yes</button>  
@@ -18,7 +18,7 @@
 export default {
   name: "ConfirmDelete",
   props: {
-    visible: Boolean,
+    type: String,
     id: Number,
   },
   methods:{

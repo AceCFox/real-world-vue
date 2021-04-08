@@ -1,5 +1,5 @@
 <template>
-    <ConfirmDelete v-if="deleteModalOpen" @closeModal = "clickedDelete" :id="event.id"/>
+    <ConfirmDelete v-if="deleteModalOpen" @closeModal = "clickedDelete" :id="event.id" type = 'event'/>
     <div v-if="event">
         <div class="event-header">
         <span class="eyebrow">@{{ event.time }} on {{ event.date || date }}</span>
