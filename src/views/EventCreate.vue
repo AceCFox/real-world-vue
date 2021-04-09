@@ -5,13 +5,12 @@
           <!-- <select v-model="event.category">
             <option v-for="cat in categories.categories" :key="cat">{{ cat }}</option>
           </select> -->
-          <BaseRadio 
-            v-for="cat in categories.categories" :key="cat"
+          <BaseRadioGroup
+            :options="categories.categories"
             v-model="event.category"
-            :value= cat
-            :label = cat
-            name= "events"
-            />
+            name="categories"
+            vertical
+           />
           <h4 class = "button" @click="editCategories">Add or Remove a Category</h4>
           <h3>Name & describe your event</h3>
             <BaseInput
@@ -47,13 +46,13 @@
  <script>
     import Datepicker from 'vue3-datepicker'
     import BaseInput from "@/components/BaseInput.vue";
-    import BaseRadio from "@/components/BaseRadio.vue";
+    import BaseRadioGroup from "@/components/BaseRadioGroup.vue";
 
     export default {
       components: {
         Datepicker,
         BaseInput,
-        BaseRadio
+        BaseRadioGroup
       },
       data() {
         const times = []
