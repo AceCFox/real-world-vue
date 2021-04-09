@@ -41,9 +41,13 @@ export const actions =  {
           })
     },
     createEvent({ dispatch, rootState }, event) {
+      let page = event.maxPage
+      if(page%3===0){
+          page++
+      }
       console.log('User creating event is ' + rootState.user.user.name)
       return EventService.postEvent(event) .then(() => {
-        dispatch(`fetchEvents(4, ${this.maxPage})`)
+        dispatch(`fetchEvents(3, ${page})`)
         const notification = {
             type: 'success',
             message: 'Event sucessfully created!'
