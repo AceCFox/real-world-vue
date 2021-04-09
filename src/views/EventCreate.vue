@@ -1,10 +1,17 @@
 <template>
     <h1>Create an Event</h1>
     <form @submit.prevent="createEvent">
-          <label>Select a category</label>
-          <select v-model="event.category">
+          <h3>Select a category</h3>
+          <!-- <select v-model="event.category">
             <option v-for="cat in categories.categories" :key="cat">{{ cat }}</option>
-          </select>
+          </select> -->
+          <BaseRadio 
+            v-for="cat in categories.categories" :key="cat"
+            v-model="event.category"
+            :value= cat
+            :label = cat
+            name= "events"
+            />
           <h4 class = "button" @click="editCategories">Add or Remove a Category</h4>
           <h3>Name & describe your event</h3>
             <BaseInput
@@ -25,7 +32,7 @@
           <h3>When is your event?</h3>
           <div class="field">
             <label>Date</label>
-            <datepicker v-model="event.date" placeholder="Select a date"/>
+            <Datepicker v-model="event.date" placeholder="Select a date"/>
           </div>
           <div class="field">
             <label>Select a time</label>
@@ -40,10 +47,13 @@
  <script>
     import Datepicker from 'vue3-datepicker'
     import BaseInput from "@/components/BaseInput.vue";
+    import BaseRadio from "@/components/BaseRadio.vue";
+
     export default {
       components: {
         Datepicker,
-        BaseInput
+        BaseInput,
+        BaseRadio
       },
       data() {
         const times = []
@@ -67,7 +77,7 @@
             title: '',
             description: '',
             location: '',
-            date: '',
+            date: new Date(), 
             time: '',
             attendees: []
           }

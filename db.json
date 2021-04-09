@@ -245,6 +245,21 @@
       "date": "2021-04-25T05:00:00.000Z",
       "time": "18:00",
       "attendees": []
+    },
+    {
+      "id": 7210494,
+      "category": "new cat",
+      "organizer": {
+        "id": "abc123",
+        "name": "Ace"
+      },
+      "title": "trial title",
+      "description": "trial description",
+      "location": "",
+      "date": "2021-04-15T05:00:00.000Z",
+      "time": "15:00",
+      "attendees": [],
+      "address": "a place"
     }
   ]
 }
